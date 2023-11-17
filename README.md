@@ -4,6 +4,11 @@ This script sets your AWS Cloud GPU instance (Windows Server 2019/2022) with NVI
 
 **This tool is based on [Parsec Cloud Prep Tool](https://github.com/parsec-cloud/Parsec-Cloud-Preparation-Tool) but only for AWS and fixes bugs, and settings.**
 
+## TO DOs
+
+- Install Steam and Epic
+- ViGEmBus Setup 1.22.0 for PS4 controllers
+
 > It's provided as is with no warranty, or gurantee if it fails, so use it at your own risk. Cloud billing is your responbility do not rely on this tool.
 
 <div style="text-align: center;">

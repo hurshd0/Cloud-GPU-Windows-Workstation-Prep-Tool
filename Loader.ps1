@@ -1,26 +1,23 @@
 cls
- Write-Host -foregroundcolor green "                                                        
-                                    @@@@@@@@@@                   
-                                @@@@@      -@@@@                
-                              @@@*             @@@              
-                             @@@                -@@*            
-                            @@@                   @@*           
-                      @@@@@@@@                     @@           
-                    @@@@                           @@*          
-                  *@@                              *@@@*        
-                 -@@                                  @@@       
-           -@@@@@@@@                                     @@@      
-          @@@                                 @@@         @@@     
-         @@          @@                       @@@          @@@     
-        @@*          @@                   @@@     @@@      @@@     
-        @@        @@@@@@@@                @@@     @@@      @@@     
-        @@           @@                       @@@          @@@     
-        @@@          @@                       @@@        @@@      
-         @@@                                          @@@       
-          @@@@                                     @@@@         
-            -@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           
-                                                    
-
+Write-Host -foregroundcolor green "                                                        
+                               ((//////                                
+                             #######//////                             
+                             ##########(/////.                         
+                             #############(/////,                      
+                             #################/////*                   
+                             #######/############////.                 
+                             #######/// ##########////                 
+                             #######///    /#######///                 
+                             #######///     #######///                 
+                             #######///     #######///                 
+                             #######////    #######///                 
+                             ########////// #######///                 
+                             ###########////#######///                 
+                               ####################///                 
+                                   ################///                 
+                                     *#############///                 
+                                         ##########///                 
+                                            ######(*                   
                     ~Cloud GPU Gaming Setup Script~
 
                     This script sets up your cloud computer
@@ -46,22 +43,22 @@ cls
 
     
 "                                         
-Write-Output "Setting up Environment"
+Write-Output "[o] Setting up Environment"
 $path = [Environment]::GetFolderPath("Desktop")
-if((Test-Path -Path $path\ParsecTemp ) -eq $true){
-    } 
+if ((Test-Path -Path $path\ParsecTemp ) -eq $true) {
+} 
 Else {
-    New-Item -Path $path\ParsecTemp -ItemType directory| Out-Null
-    }
-
+  New-Item -Path $path\ParsecTemp -ItemType directory | Out-Null
+}
+    
+# Unblocking all script files
 Unblock-File -Path .\*
-copy-Item .\* -Destination $path\ParsecTemp\ -Force -Recurse | Out-Null
-#lil nap
+Copy-Item .\* -Destination $path\ParsecTemp\ -Force -Recurse | Out-Null
+# lil nap
 Start-Sleep -s 1
-#Unblocking all script files
-Write-Output "Unblocking files just in case"
+Write-Output "[o] Unblocking files just in case"
 Get-ChildItem -Path $path\ParsecTemp -Recurse | Unblock-File
-Write-Output "Starting main script"
-start-process powershell.exe -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
-Write-Host "You can close this window now...progress will happen on the Powershell Window that just opened" -backgroundcolor red
-stop-process -Id $PID
+Write-Output "[o] Starting main script"
+Start-Process powershell.exe -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
+Write-Host "You can close this window now...progress will happen on the Powershell Window that just opened" -BackgroundColor Green -ForegroundColor White
+Stop-Process -Id $PID
