@@ -1040,8 +1040,8 @@ $ScripttaskList = @(
 
 
 foreach ($func in $ScripttaskList) {
-    #$percentcomplete = $($ScriptTaskList.IndexOf($func) / $ScripttaskList.Count * 100)
-    #& $func $percentcomplete
+    $percentcomplete = $($ScriptTaskList.IndexOf($func) / $ScripttaskList.Count * 100)
+    & $func $percentcomplete
 }
 
 # StartGPUUpdate -DontPromptPasswordUpdateGPU:$DontPromptPasswordUpdateGPU
