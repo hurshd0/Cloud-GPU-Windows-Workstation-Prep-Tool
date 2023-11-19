@@ -59,6 +59,6 @@ Start-Sleep -s 1
 Write-Output "[o] Unblocking files just in case"
 Get-ChildItem -Path $path\ParsecTemp -Recurse | Unblock-File
 Write-Output "[o] Starting main script"
-Start-Process powershell.exe -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
+Start-Process powershell.exe -verb RunAS -argument "-file $path\ParsecTemp\PostInstall\PostInstall.ps1"
 Write-Host "You can close this window now...progress will happen on the Powershell Window that just opened" -BackgroundColor Green -ForegroundColor White
 Stop-Process -Id $PID
