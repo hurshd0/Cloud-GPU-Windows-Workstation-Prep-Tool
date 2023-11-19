@@ -46,7 +46,7 @@ function ProgressWriter {
     Write-Progress -Activity "Setting Up Your Machine" -Status $status -PercentComplete $percentcomplete
 }
 
-Function Get-InstanceCredential {
+function Get-InstanceCredential {
     Try {
         $Credential = Get-Credential -Credential $null
         Try {
@@ -59,7 +59,7 @@ Function Get-InstanceCredential {
             $Retry = Read-Host "(Y/N)"
             Switch ($Retry) {
                 Y {
-                    GetInstanceCredential 
+                    Get-InstanceCredential 
                 }
                 N {
                     Return
@@ -73,7 +73,7 @@ Function Get-InstanceCredential {
         $Cancel = Read-Host "(Y/N)"
         Switch ($Cancel) {
             Y {
-                GetInstanceCredential
+                Get-InstanceCredential
             }
             N {
                 Return
@@ -428,6 +428,23 @@ Add-Type  @"
         }
 "@
 
+
+function TestCredential {
+    param
+    (
+        [PSCredential]$Credential
+    )
+    try {
+        Start-Process -FilePath cmd.exe /c -Credential ($Credential)
+        }
+    Catch {
+        If ($Error[0].Exception.Message) {
+        $Error[0].Exception.Message
+        Throw
+        }
+        }
+    }
+
 function Set-AutoLogon {
     [CmdletBinding(SupportsShouldProcess)]
     param
@@ -481,7 +498,7 @@ Do you want this computer to log on to Windows automatically?
         $ReadHost = Read-Host "(Y/N)" 
         Switch ($ReadHost) {
             Y {
-                GetInstanceCredential
+                Get-InstanceCredential
             }
             N {
             }
@@ -1008,6 +1025,7 @@ Else {
     New-Item -Path $path\ParsecTemp -ItemType directory | Out-Null
 }
 
+PromptUserAutoLogon -DontPromptPasswordUpdateGPU:$DontPromptPasswordUpdateGPU
 $ScripttaskList = @(
     "Setup-Environment";
     "Add-RegItems";
@@ -1028,10 +1046,10 @@ $ScripttaskList = @(
     "Install7Zip";
     "Install-XBox360Controller";
     "Install-Parsec";
+    "Disable-Devices";
     "Install-ParsecVDD";
     "Install-VBAAudioDriver";
     "Start-Parsec";
-    "Disable-Devices";
     "CleanUp-AWSShortcuts";
     "CleanUp-Recent";
     "CleanUp-TempFolder";
@@ -1040,8 +1058,8 @@ $ScripttaskList = @(
 
 
 foreach ($func in $ScripttaskList) {
-    $percentcomplete = $($ScriptTaskList.IndexOf($func) / $ScripttaskList.Count * 100)
-    & $func $percentcomplete
+    #$percentcomplete = $($ScriptTaskList.IndexOf($func) / $ScripttaskList.Count * 100)
+    #& $func $percentcomplete
 }
 
 # StartGPUUpdate -DontPromptPasswordUpdateGPU:$DontPromptPasswordUpdateGPU
